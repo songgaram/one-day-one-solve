@@ -37,4 +37,34 @@ def solution(n, network, repair):
 # n = 6
 # network = [[1, 2], [3, 5], [4, 2], [5, 6]]
 # repair = [[3, 2, 10], [5, 4, 15]]
-print(solution(4, [[1, 2]], [[3, 4, 10], [3, 2, 12]]))
+# print(solution(4, [[1, 2]], [[3, 4, 10], [3, 2, 12]]))
+
+# Kruskal Algorithm
+def solution(n, network, repair):
+
+    def find_p(x):
+        while x != parents[x]:
+            x = parents[x]
+        return x
+    
+    parents = [x for x in range(n + 1)]
+    # sorted는 병합정렬을 기반으로 만들어져 O(nlog(n))
+    repair.sort(key=lambda x: x[2])
+    # network 가중치 0으로 넣어주기
+    for i in range(len(network)):
+        network[i].append(0)
+    # repair/network 합치기
+    edges = network + repair
+    
+    distance, cnt = 0, 0
+    for a, b, value in edges:
+        if find_p(a) != find_p(b):
+            parents[find_p(b)] = find_p(a)
+            distance += value
+            cnt += 1
+        
+    if cnt == n - 1:
+        return distance
+    else:
+        -1
+print(solution(6, [[1, 2], [3, 5], [4, 2], [5, 6]], [[3, 2, 10], [5, 4, 15]]))
