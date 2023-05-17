@@ -58,8 +58,8 @@ for i in range(n):
             dic2[board[i][j]] += 1
             dfs(i, j)
 
-r, g, b  = list(dic.values())
-c = max(r, g) + b       
-s = sum(dic.values())
-print(s, c)
-print(dic)
+# r, g, b  = list(dic.values())
+# c = max(r, g) + b       
+# s = sum(dic.values())
+# print(s, c)
+# print(dic)
